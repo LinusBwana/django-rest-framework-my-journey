@@ -5,3 +5,6 @@ class Student(models.Model):
     student_Id = models.CharField(max_length=10)
     name = models.CharField(max_length=50)
     branch = models.CharField(max_length=20)
+
+    class Meta:
+        ordering = ['id']
