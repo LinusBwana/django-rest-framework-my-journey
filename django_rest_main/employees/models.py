@@ -10,4 +10,4 @@ class Employee(models.Model):
         return self.emp_name
     
     class Meta:
-        ordering = ['emp_name']
+        ordering = ['emp_id']
