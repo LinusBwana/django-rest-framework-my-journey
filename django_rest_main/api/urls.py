@@ -11,4 +11,6 @@ urlpatterns = [
     # Using mixins - Redone Employee using mixins
     path('staffs/', views.Staffs.as_view()),
     path('staffs/<int:pk>/', views.StaffDetails.as_view()),
+
+    path('workers/', views.Workers.as_view()),
 ]

@@ -55,6 +55,7 @@ def studentDetailView(request, pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
+# class-based view 
 class Employees(APIView):
     def get(self, request):
         employees = Employee.objects.all().order_by('emp_name')
@@ -68,7 +69,8 @@ class Employees(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+# class-based view    
 class EmployeeDetail(APIView):
     def get_object(self, pk):
         try:
@@ -103,6 +105,7 @@ class EmployeeDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
+#  mixins
 class Staffs(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
@@ -112,7 +115,8 @@ class Staffs(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPI
     
     def post(self, request):
         return self.create(request)
-    
+
+#  mixins    
 class StaffDetails(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
@@ -125,3 +129,9 @@ class StaffDetails(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
     
     def delete(self, request, pk):
         return self.destroy(request, pk)
+    
+
+# Generics
+class Workers(generics.ListCreateAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
