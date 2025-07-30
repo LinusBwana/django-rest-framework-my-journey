@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from employees.models import Employee
 from django.http import Http404
-from rest_framework import mixins, generics
+from rest_framework import mixins, generics, viewsets
 
 # Create your views here.
 @api_view(['GET', 'POST'])
@@ -140,3 +140,10 @@ class WorkerDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     lookup_field = 'pk'
+
+# viewsets
+class AgentViewset(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Employee.objects.all()
+        serializer = EmployeeSerializer(queryset, many=True)
+        return Response(serializer.data)

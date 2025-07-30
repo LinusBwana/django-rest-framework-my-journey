@@ -1,5 +1,9 @@
-from django.urls import path
+from django.urls import include, path
 from . import views
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register('agents', views.AgentViewset, basename='agent')
 
 urlpatterns = [
     path('students/', views.studentsView),
@@ -15,4 +19,6 @@ urlpatterns = [
     # Using Generics - Redone Employee using Generics
     path('workers/', views.Workers.as_view()),
     path('workers/<int:pk>/', views.WorkerDetails.as_view()),
+
+    path('', include(router.urls)),
 ]
