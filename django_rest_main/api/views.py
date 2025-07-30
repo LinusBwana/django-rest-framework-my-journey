@@ -141,7 +141,7 @@ class WorkerDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = EmployeeSerializer
     lookup_field = 'pk'
 
-# viewsets
+# Viewsets
 class AgentViewset(viewsets.ViewSet):
     def list(self, request):
         queryset = Employee.objects.all()
@@ -173,3 +173,9 @@ class AgentViewset(viewsets.ViewSet):
         agent = get_object_or_404(Employee, pk=pk)
         agent.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+# ModelViewset
+class AssociateViewset(viewsets.ModelViewSet):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer

@@ -5,6 +5,9 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register('agents', views.AgentViewset, basename='agent')
 
+router2 = DefaultRouter()
+router2.register('associates', views.AssociateViewset, basename='associate')
+
 urlpatterns = [
     path('students/', views.studentsView),
     path('student/<int:pk>/', views.studentDetailView),
@@ -20,5 +23,9 @@ urlpatterns = [
     path('workers/', views.Workers.as_view()),
     path('workers/<int:pk>/', views.WorkerDetails.as_view()),
 
+    # using Viewset
     path('', include(router.urls)),
+
+    # Using ModelViewset
+    path('', include(router2.urls))
 ]
