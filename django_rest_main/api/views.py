@@ -1,4 +1,4 @@
-# from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 # from django.http import JsonResponse
 from django.http import Http404
 from students.models import Student
@@ -155,3 +155,8 @@ class AgentViewset(viewsets.ViewSet):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors)
+    
+    def retrieve(self, request, pk=None):
+        agent = get_object_or_404(Employee, pk=pk)
+        serializer = EmployeeSerializer(agent)
+        return Response(serializer.data, status=status.HTTP_200_OK)
