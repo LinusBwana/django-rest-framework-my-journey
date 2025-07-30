@@ -135,3 +135,8 @@ class StaffDetails(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
 class Workers(generics.ListCreateAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+
+class WorkerDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+    lookup_field = 'pk'

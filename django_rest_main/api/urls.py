@@ -12,5 +12,7 @@ urlpatterns = [
     path('staffs/', views.Staffs.as_view()),
     path('staffs/<int:pk>/', views.StaffDetails.as_view()),
 
+    # Using Generics - Redone Employee using Generics
     path('workers/', views.Workers.as_view()),
+    path('workers/<int:pk>/', views.WorkerDetails.as_view()),
 ]
