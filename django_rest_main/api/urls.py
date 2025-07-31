@@ -27,5 +27,9 @@ urlpatterns = [
     path('', include(router.urls)),
 
     # Using ModelViewset
-    path('', include(router2.urls))
+    path('', include(router2.urls)),
+
+    # For blogs app
+    path('blogs/', views.BlogsView.as_view()),
+    path('comments/', views.CommentsView.as_view()),
 ]
