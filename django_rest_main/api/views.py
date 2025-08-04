@@ -12,6 +12,9 @@ from django.http import Http404
 from rest_framework import mixins, generics, viewsets
 from blogs.models import Blog, Comment
 from blogs.serializers import BlogSerializers, CommentSerializers
+from .paginations import CustomPagination
+from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
+
 
 # Create your views here.
 @api_view(['GET', 'POST'])
@@ -101,7 +104,7 @@ class EmployeeDetail(APIView):
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, requst, pk):
+    def delete(self, request, pk):
         employee = self.get_object(pk)
         employee.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -181,11 +184,13 @@ class AgentViewset(viewsets.ViewSet):
 class AssociateViewset(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+    pagination_class = CustomPagination
 
 # FOR BLOG APP
 class BlogsView(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializers
+    pagination_class = LimitOffsetPagination
 
 class CommentsView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
