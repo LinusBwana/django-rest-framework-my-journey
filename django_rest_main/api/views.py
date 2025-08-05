@@ -16,7 +16,7 @@ from .paginations import CustomPagination
 from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from blogs.filters import BlogFilter
-
+from rest_framework.filters import SearchFilter
 
 # Create your views here.
 @api_view(['GET', 'POST'])
@@ -195,8 +195,10 @@ class BlogsView(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializers
     pagination_class = LimitOffsetPagination
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = BlogFilter
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_class = BlogFilter
+    filter_backends = [SearchFilter]
+    search_fields = ['blog_body']
 
 class CommentsView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
