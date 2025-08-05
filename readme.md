@@ -16,7 +16,3 @@ It acts as a two-way communication bridge between frontend and backend
      - PATCH - Partially update an existing resource
      - DELETE - Delete a resource
 4. **Easy-to-Read Data:** REST APIs returns the response in a standardized easy to read formats, typically JSON or XML formats.
-
-
-mixins and APIView - custome pagination
-generic and viewsets - global pagination
