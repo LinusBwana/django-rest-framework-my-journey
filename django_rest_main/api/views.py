@@ -14,6 +14,7 @@ from blogs.models import Blog, Comment
 from blogs.serializers import BlogSerializers, CommentSerializers
 from .paginations import CustomPagination
 from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 # Create your views here.
@@ -185,6 +186,8 @@ class AssociateViewset(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['emp_name']
 
 # FOR BLOG APP
 class BlogsView(generics.ListCreateAPIView):
