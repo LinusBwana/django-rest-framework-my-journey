@@ -15,6 +15,7 @@ from blogs.serializers import BlogSerializers, CommentSerializers
 from .paginations import CustomPagination
 from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
+from blogs.filters import BlogFilter
 
 
 # Create your views here.
@@ -194,6 +195,8 @@ class BlogsView(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializers
     pagination_class = LimitOffsetPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = BlogFilter
 
 class CommentsView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
